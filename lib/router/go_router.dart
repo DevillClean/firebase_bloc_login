@@ -13,6 +13,7 @@ class AppRouter {
   static final AppRouter _instance = AppRouter._privateConstructor();
   static late GoRouter router;
   final SessionService sessionService = SessionService.init();
+  
 
   AppRouter._privateConstructor() {
     _initialize();

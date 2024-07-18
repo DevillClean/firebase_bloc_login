@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 
 
-
-
 class SessionService extends ChangeNotifier {
   static final SessionService instance = SessionService._privateConstructor();
   StreamSubscription<User?>?_subscription;
