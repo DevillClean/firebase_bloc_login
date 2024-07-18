@@ -17,72 +17,80 @@ class _AuthScreenState extends State<AuthScreen> {
   final loginController = TextEditingController();
   final passwordController = TextEditingController();
 
-  @override
-  void dispose() {
-    loginController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Login to your account'),
-          ),
-          body: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Логин',
-                      style: tStyleFont,
-                    ),
-                    const SizedBox(height: 5),
-                    MyTextField(
-                      controller: loginController,
-                      hintText: 'Email',
-                      obscureText: false,
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Пароль',
-                      style: tStyleFont,
-                    ),
-                    const SizedBox(height: 5),
-                    MyTextField(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
-                    ),
-                    const SizedBox(height: 25),
-                    BlocListener<LoginBloc, LoginState>(
-                      listener: (context, state) {
-                        if (state is LoginSucces) {
-                          context.go('/home');
-                        }
-                      },
-                      child: MyButton(
-                        onTap: () {
-                          BlocProvider.of<LoginBloc>(context).add(
-                            EnterLoginEvent(
-                                email: loginController.text,
-                                password: passwordController.text),
-                          );
-                        },
-                        name: 'Sign in',
-                      ),
-                    ),
-                  ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login to your account'),
+      ),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Логин',
+                  style: tStyleFont,
                 ),
-              ),
-            ],
+                const SizedBox(height: 5),
+                MyTextField(
+                  controller: loginController,
+                  hintText: 'Email',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Пароль',
+                  style: tStyleFont,
+                ),
+                const SizedBox(height: 5),
+                MyTextField(
+                  controller: passwordController,
+                  hintText: 'Password',
+                  obscureText: true,
+                ),
+                const SizedBox(height: 25),
+                BlocListener<LoginBloc, LoginState>(
+                  listener: (context, state) {
+                    if (state is LoginSucces) {
+                      context.go('/home');
+                    }
+                    if (state is LoginError) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          content: Text(
+                            state.errorText,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: MyButton(
+                    onTap: () {
+                      BlocProvider.of<LoginBloc>(context).add(
+                        EnterLoginEvent(
+                            email: loginController.text,
+                            password: passwordController.text),
+                      );
+                    },
+                    name: 'Sign in',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                MyButton(
+                  onTap: () {},
+                  name: 'Login as guest',
+                ),
+              ],
+            ),
           ),
-        );
-      
-    
+        ],
+      ),
+    );
   }
 }

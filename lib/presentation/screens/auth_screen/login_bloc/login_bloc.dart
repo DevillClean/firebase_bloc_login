@@ -13,7 +13,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await repository.login(login: event.email, password: event.password);
         emit(LoginSucces());
       } catch (e){
-        emit(LoginError());
+        emit(LoginError(
+          errorText: e.toString()
+          ),
+        );
       }
     });
   }

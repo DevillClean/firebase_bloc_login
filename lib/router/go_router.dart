@@ -39,7 +39,8 @@ class AppRouter {
         builder: (context, state) => RepositoryProvider(
           create: (context) => LoginRepository(),
           child: BlocProvider(
-            create: (context) => LoginBloc(repository: RepositoryProvider.of<LoginRepository>(context)),
+            create: (context) => LoginBloc(
+              repository: RepositoryProvider.of<LoginRepository>(context)),
             child: const AuthScreen(),
           ),
         ),
