@@ -11,9 +11,9 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(Colors.white),
-        foregroundColor: WidgetStateProperty.all(Colors.black),
-      ),
+          //backgroundColor: WidgetStateProperty.all(Colors.white),
+          // foregroundColor: WidgetStateProperty.all(Colors.black),
+          ),
       onPressed: () {
         context.go('/');
       },

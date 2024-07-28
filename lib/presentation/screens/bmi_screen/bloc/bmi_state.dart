@@ -5,7 +5,7 @@ class BmiState {
   final int weight;
   final Gender? gender;
   final int age;
-  final double bmiResult;
+  final int bmiResult;
   final bool isBmiCalculated;
   BmiState({
     required this.height,
@@ -21,7 +21,7 @@ class BmiState {
       weight: 30,
       gender: null,
       age: 10,
-      bmiResult: 0.0,
+      bmiResult: 0,
       isBmiCalculated: false,
     );
   }
@@ -30,7 +30,7 @@ class BmiState {
     int? weight,
     int? age,
     Gender? gender,
-    double? bmiResult,
+    int? bmiResult,
     String? resultType,
     String? resultMessage,
     bool? isBmiCalculated,

@@ -24,17 +24,7 @@ class AppRouter {
   }
 
   void _initialize() {
-    router = GoRouter(initialLocation: '/', routes: [
-      GoRoute(
-        path: '/',
-        redirect: (context, state) {
-          if (SessionService.instance.currentUser != null) {
-            return '/home';
-          } else {
-            return '/login';
-          }
-        },
-      ),
+    router = GoRouter(initialLocation: '/home', routes: [
       GoRoute(
         path: '/login',
         builder: (context, state) => RepositoryProvider(

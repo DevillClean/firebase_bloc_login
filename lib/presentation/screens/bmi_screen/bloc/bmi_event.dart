@@ -2,6 +2,11 @@ part of 'bmi_bloc.dart';
 
 abstract class BmiEvent {}
 
+
+class Initialize extends BmiEvent {
+
+  Initialize();
+}
 class OnGenderChange extends BmiEvent {
   final Gender gender;
   OnGenderChange({required this.gender});

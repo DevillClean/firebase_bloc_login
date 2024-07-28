@@ -56,7 +56,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 BlocListener<LoginBloc, LoginState>(
                   listener: (context, state) {
                     if (state is LoginSucces) {
-                      context.go('/home');
+                      context.pop(true);
                     }
                     if (state is LoginError) {
                       showDialog(

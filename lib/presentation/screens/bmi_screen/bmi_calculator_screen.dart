@@ -7,6 +7,7 @@ import 'package:flutter_application_2/presentation/screens/bmi_screen/widgets/ca
 import 'package:flutter_application_2/theme/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class BmiCalculatorApp extends StatefulWidget {
   const BmiCalculatorApp({super.key});
@@ -22,6 +23,14 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: bgk,
+          appBar: AppBar(
+            actions: [
+              TextButton(
+                onPressed: _onLoginPressed,
+                child: const Text('Login'),
+              ),
+            ],
+          ),
           body: Column(
             children: [
               const MenuButton(),
@@ -105,8 +114,7 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
                                   value: state.height.toDouble(),
                                   onChanged: (value) {
                                     context.read<BmiBloc>().add(
-                                        OnHeightChange(
-                                            height: value.toInt()));
+                                        OnHeightChange(height: value.toInt()));
                                   },
                                 ),
                               ],
@@ -144,8 +152,7 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
                                           OnWeightChange(
                                               weight: state.weight - 1));
                                     },
-                                    icon:
-                                        const Icon(FontAwesomeIcons.minus),
+                                    icon: const Icon(FontAwesomeIcons.minus),
                                   ),
                                   IconButton(
                                     onPressed: () {
@@ -183,20 +190,18 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
                                 children: [
                                   IconButton(
                                     onPressed: () {
-                                      context.read<BmiBloc>().add(
-                                          OnAgeChange(age: state.age - 1));
+                                      context
+                                          .read<BmiBloc>()
+                                          .add(OnAgeChange(age: state.age - 1));
                                     },
-                                    icon:
-                                        const Icon(FontAwesomeIcons.minus),
+                                    icon: const Icon(FontAwesomeIcons.minus),
                                   ),
                                   IconButton(
                                       onPressed: () {
                                         context.read<BmiBloc>().add(
-                                            OnAgeChange(
-                                                age: state.age + 1));
+                                            OnAgeChange(age: state.age + 1));
                                       },
-                                      icon: const Icon(
-                                          FontAwesomeIcons.plus)),
+                                      icon: const Icon(FontAwesomeIcons.plus)),
                                 ],
                               ),
                             ),
@@ -214,5 +219,13 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
         );
       },
     );
+  }
+
+
+  void _onLoginPressed(){
+   final isLoggedIn =  context.push('/login') as bool?;
+   if(isLoggedIn != null && isLoggedIn){
+     context.read<BmiBloc>().add(Initialize());
+   }
   }
 }

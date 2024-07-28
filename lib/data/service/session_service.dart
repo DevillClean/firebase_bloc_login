@@ -24,6 +24,7 @@ class SessionService extends ChangeNotifier {
     void listenForSession(){
       _subscription = FirebaseAuth.instance.authStateChanges().listen((User? user) {
         currentUser = user;
+
         notifyListeners();
       });
     } 
