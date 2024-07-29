@@ -12,7 +12,7 @@ class MenuButton extends StatefulWidget {
 }
 
 class _MenuButtonState extends State<MenuButton> {
-  final user = FirebaseAuth.instance.currentUser!;
+  // final user = FirebaseAuth.instance.currentUser!;
 
   void signOut() async {
     await FirebaseAuth.instance.signOut();
@@ -39,7 +39,7 @@ class _MenuButtonState extends State<MenuButton> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('${user.email}'),
+              // Text('${user.email}'),
               IconButton(
                 onPressed: signOut,
                 icon: const Icon(Icons.logout),

@@ -222,8 +222,8 @@ class BmiCalculatorAppState extends State<BmiCalculatorApp> {
   }
 
 
-  void _onLoginPressed(){
-   final isLoggedIn =  context.push('/login') as bool?;
+  void _onLoginPressed() async {
+   final isLoggedIn = await context.push('/login') as bool?;
    if(isLoggedIn != null && isLoggedIn){
      context.read<BmiBloc>().add(Initialize());
    }

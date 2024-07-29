@@ -20,25 +20,33 @@ class BmiBloc extends Bloc<BmiEvent, BmiState> {
     add(Initialize());
   }
 
-  void _onInitialize(Initialize event, Emitter<BmiState> emit) async {
+void _onInitialize(Initialize event, Emitter<BmiState> emit) async {
+  try {
     final bmiDataList = await _bmiDataRepository.getCalculatorData();
-      if(bmiDataList.isNotEmpty) {
+    if (bmiDataList.isNotEmpty) {
       final data = bmiDataList.first;
       emit(state.copyWith(
-        height: data.height, 
-        weight: data.weight, 
+        height: data.height,
+        weight: data.weight,
         age: data.age,
         bmiResult: data.bmiResult,
-        ));
-    } else {
-      emit(state.copyWith(
-        height: 0,
-        weight: 0,
-        age: 0,
-        bmiResult: 0
       ));
+    } else {
+      emit(_getDefaultBmiState());
     }
+  } catch (e) {
+    emit(_getDefaultBmiState());
   }
+}
+
+BmiState _getDefaultBmiState() {
+  return state.copyWith(
+    height: 40,
+    weight: 40,
+    age: 10,
+    bmiResult: 0,
+  );
+}
 
   void onGenderChange(OnGenderChange event, Emitter<BmiState> emit) {
     emit(state.copyWith(gender: event.gender));

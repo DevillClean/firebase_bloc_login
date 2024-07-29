@@ -10,10 +10,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      style: ButtonStyle(
-          //backgroundColor: WidgetStateProperty.all(Colors.white),
-          // foregroundColor: WidgetStateProperty.all(Colors.black),
-          ),
+      style: const ButtonStyle(),
       onPressed: () {
         context.go('/');
       },

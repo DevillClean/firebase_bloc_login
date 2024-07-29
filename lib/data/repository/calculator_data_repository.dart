@@ -19,22 +19,31 @@ class CalculatorDataRepository {
     }
   }
 
+  Future<List<DbModel>> readFromDb() async {
+    return []; 
+}
+
   Future<List<BmiData>> getCalculatorData() async {
+      List<DbModel> data;
     if (SessionService.instance.currentUser != null) {
-      final data =  await _fireStoreDbProvider.readFromDb();
-      if (data.isNotEmpty) {
-        return convertDbModelBmiData(data);
-      } else {
-        throw Exception('No data found');
-      }
+        data = await _fireStoreDbProvider.readFromDb();
     } else {
-      final data = await  _localDbProvider.readFromDb();
-        if(data.isNotEmpty){
-          return convertDbModelBmiData(data);
-        } else {
-          throw Exception('No data found is local database');
-        }
-    }
+        data = await _localDbProvider.readFromDb();
+      } 
+       if(data.isNotEmpty) {
+        return convertDbModelBmiData(data);
+       } else {
+        throw Exception('No data found');
+       }
+      } 
+    // } else {
+    //   final data = await  _localDbProvider.readFromDb();
+    //     if(data != null && data.isNotEmpty){
+    //       return convertDbModelBmiData(data);
+    //     } else {
+    //       throw Exception('No data found is local database');
+    //     }
+    // }
   }
 
   List<BmiData> convertDbModelBmiData(List<DbModel> dbModels){
@@ -45,4 +54,4 @@ class CalculatorDataRepository {
       dbModel.totalBmi
     )).toList();
   }
-}
+
